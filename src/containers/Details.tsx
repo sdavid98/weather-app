@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+
 import { Back, CityTitle, Time, WeatherInfo } from "../components";
 import { AppRoute, Icon } from "../types/enums";
 import IconWithText from "../components/IconWithText/IconWithText";
@@ -20,8 +21,11 @@ const Details = () => {
     cityName: string;
   }>();
   const [details, setDetails] = useState<WeatherDetails>();
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
+    setShowError(false);
+
     if (cityName && countryCode) {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&units=metric&appid=775efb0f52ab11dedfc4f8c2b451d598`
@@ -36,6 +40,9 @@ const Details = () => {
             sunset: data.sys.sunset,
             temp: data.main.temp,
           });
+        })
+        .catch(() => {
+          setShowError(true);
         });
     }
   }, [cityName, countryCode]);
@@ -43,6 +50,15 @@ const Details = () => {
   if (!cityName || !countryCode) {
     navigate(AppRoute.HOME);
     return null;
+  }
+
+  if (showError) {
+    return (
+      <div className="color-light">
+        <Back />
+        An error ocurred while fetching location details :(
+      </div>
+    );
   }
 
   if (!details) {
