@@ -3,27 +3,19 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { CapitalInfo } from "../types/types";
 
-export type CitiesState = CapitalInfo[];
-
-const initialState: CitiesState = [];
+const initialState: CapitalInfo[] = [];
 
 export const citiesSlice = createSlice({
   name: "cities",
   initialState,
   reducers: {
-    // increment: (state) => {
-    //   state.cities += 1;
-    // },
-    // decrement: (state) => {
-    //   state.cities -= 1;
-    // },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.cities += action.payload;
-    // },
+    addCity: (state, action: PayloadAction<CapitalInfo>) => {
+      state.push(action.payload);
+    },
   },
 });
 
-// export const { increment, decrement, incrementByAmount } = citiesSlice.actions;
+export const { addCity } = citiesSlice.actions;
 
 export const store = configureStore({
   reducer: {

@@ -1,15 +1,19 @@
-import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 import { CapitalInfo } from "../types/types";
-import { AssetPath } from "../types/enums";
-import { RootState } from "../store";
+import { AppRoute, AssetPath } from "../types/enums";
+import { RootState, addCity } from "../store";
 
 const Search = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const savedCities = useSelector((state: RootState) => state.cities);
   const [allCities, setAllCities] = useState<CapitalInfo[]>([]);
   const [citiesToShow, setCitiesToShow] = useState<CapitalInfo[]>([]);
   const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState<CapitalInfo>();
 
   const savedCityNames = useMemo(
     () => savedCities.map(({ capital }) => capital),
@@ -21,6 +25,8 @@ const Search = () => {
   );
 
   useEffect(() => {
+    setSelected(undefined);
+
     if (query) {
       setCitiesToShow(
         availableCities
@@ -44,6 +50,15 @@ const Search = () => {
       .catch((e) => console.log(e));
   }, []);
 
+  const onSave = useCallback(() => {
+    if (selected) {
+      dispatch(addCity(selected));
+      navigate(AppRoute.HOME);
+    }
+  }, [selected, navigate, dispatch]);
+
+  console.log(selected);
+
   return (
     <div>
       <input
@@ -53,9 +68,21 @@ const Search = () => {
         id="search"
         placeholder="Search for capitals!"
       />
-      {citiesToShow.map((it) => (
-        <div key={it.capital}>{it.capital}</div>
-      ))}
+      {citiesToShow.length > 0
+        ? citiesToShow.map((it) => (
+            <div key={it.capital}>
+              <input
+                checked={selected?.capital === it.capital}
+                onChange={() => setSelected(it)}
+                type="radio"
+                id={it.capital}
+                name="selectedCapital"
+              />
+              <label htmlFor={it.capital}>{it.capital}</label>
+            </div>
+          ))
+        : null}
+      {selected ? <button onClick={onSave}>Save</button> : null}
     </div>
   );
 };
