@@ -44,7 +44,6 @@ const Search = () => {
     fetch(AssetPath.CAPITAL_DATA)
       .then((res) => res.json())
       .then((res: CapitalInfo[]) => {
-        console.log(res);
         setAllCities(res);
       })
       .catch((e) => console.log(e));
@@ -56,8 +55,6 @@ const Search = () => {
       navigate(AppRoute.HOME);
     }
   }, [selected, navigate, dispatch]);
-
-  console.log(selected);
 
   return (
     <div>

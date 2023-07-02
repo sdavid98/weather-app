@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Home, Search } from "./containers";
+import { Details, Home, Search } from "./containers";
 import { AppRoute } from "./types/enums";
 
 import "./App.css";
@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route Component={Home} path={AppRoute.HOME} />
           <Route Component={Search} path={AppRoute.SEARCH} />
+          <Route Component={Details} path={AppRoute.DETAILS} />
           <Route Component={Home} path="*" />
         </Routes>
       </BrowserRouter>

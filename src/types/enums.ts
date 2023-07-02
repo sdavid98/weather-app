@@ -1,9 +1,15 @@
 export enum AppRoute {
   HOME = "/home",
-  DETAIL = "/detail/:cityName",
+  DETAILS = "/details/:countryCode/:cityName",
   SEARCH = "/search",
 }
 
 export enum AssetPath {
   CAPITAL_DATA = "/country-capitals.json",
+}
+
+export enum Icon {
+  TEMPERATURE,
+  SUNRISE,
+  SUNSET,
 }

@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+
+  & > svg {
+    width: 1rem;
+    height: auto;
+    fill: #4990cf;
+  }
+}

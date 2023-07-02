@@ -1,0 +1,11 @@
+.back {
+  margin-bottom: 4rem;
+  width: fit-content;
+  cursor: pointer;
+
+  & > svg {
+    width: 1rem;
+    height: auto;
+    fill: #4990cf;
+  }
+}
