@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { Back, CityTitle, Time, WeatherInfo } from "../components";
 import { AppRoute, Icon } from "../types/enums";
 import IconWithText from "../components/IconWithText/IconWithText";
+import { fetchWeatherDetails } from "../requests";
 
 interface WeatherDetails {
   timeOffset: number;
@@ -27,10 +28,7 @@ const Details = () => {
     setShowError(false);
 
     if (cityName && countryCode) {
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&units=metric&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
-      )
-        .then((res) => res.json())
+      fetchWeatherDetails(cityName, countryCode)
         .then((data) => {
           setDetails({
             timeOffset: data.timezone,

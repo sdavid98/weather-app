@@ -38,7 +38,11 @@ const Home = () => {
           <CityTitle title={capital} />
         </div>
       ))}
-      <NavLink className="color-light" to={AppRoute.SEARCH}>
+      <NavLink
+        title="add new city"
+        className="color-light"
+        to={AppRoute.SEARCH}
+      >
         <Add />
       </NavLink>
     </div>

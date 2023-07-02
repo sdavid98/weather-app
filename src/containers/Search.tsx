@@ -6,6 +6,7 @@ import { CapitalInfo } from "../types/types";
 import { AppRoute, AssetPath } from "../types/enums";
 import { RootState, addCity } from "../store";
 import { Back, Input, Result } from "../components";
+import { fetchCitiesData } from "../requests";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -42,8 +43,7 @@ const Search = () => {
   }, [availableCities, query]);
 
   useEffect(() => {
-    fetch(AssetPath.CAPITAL_DATA)
-      .then((res) => res.json())
+    fetchCitiesData()
       .then((res: CapitalInfo[]) => {
         setAllCities(res);
       })
