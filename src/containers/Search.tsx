@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { CapitalInfo } from "../types/types";
 import { AppRoute, AssetPath } from "../types/enums";
 import { RootState, addCity } from "../store";
+import { Back, Input, Result } from "../components";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -58,10 +59,10 @@ const Search = () => {
 
   return (
     <div>
-      <input
-        type="text"
+      <Back />
+      <Input
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        setValue={setQuery}
         id="search"
         placeholder="Search for capitals!"
       />
@@ -74,8 +75,11 @@ const Search = () => {
                 type="radio"
                 id={it.capital}
                 name="selectedCapital"
+                hidden
               />
-              <label htmlFor={it.capital}>{it.capital}</label>
+              <label htmlFor={it.capital}>
+                <Result query={query.toLocaleLowerCase()} text={it.capital} />
+              </label>
             </div>
           ))
         : null}

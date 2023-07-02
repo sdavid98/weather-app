@@ -5,6 +5,7 @@ import { NavLink, generatePath, useNavigate } from "react-router-dom";
 import { RootState } from "../store";
 import { AppRoute } from "../types/enums";
 import { CapitalInfo } from "../types/types";
+import { Add, CityTitle } from "../components";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -29,19 +30,17 @@ const Home = () => {
 
   return (
     <div>
-      {sorted.length > 0 ? (
-        <ul>
-          {sorted.map(({ capital, countryCode }) => (
-            <li
-              key={capital}
-              onClick={() => viewDetails({ capital, countryCode })}
-            >
-              {capital}
-            </li>
-          ))}
-        </ul>
-      ) : null}
-      <NavLink to={AppRoute.SEARCH}>+</NavLink>
+      {sorted.map(({ capital, countryCode }) => (
+        <div
+          key={capital}
+          onClick={() => viewDetails({ capital, countryCode })}
+        >
+          <CityTitle title={capital} />
+        </div>
+      ))}
+      <NavLink className="color-light" to={AppRoute.SEARCH}>
+        <Add />
+      </NavLink>
     </div>
   );
 };

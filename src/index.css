@@ -12,6 +12,24 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+  text-align: center;
+}
+
+button {
+  background-color: #4bb74b;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #6ad36a;
+  }
+}
+
 .color-dark {
   color: #1b486b;
 }

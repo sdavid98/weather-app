@@ -1,0 +1,28 @@
+.wrapper {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  display: block;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #4990cf;
+  line-height: 1.5;
+  color: #7899ad;
+  font-size: 1.25rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.arrow {
+  width: 1rem;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  fill: #ffffff;
+}
