@@ -28,7 +28,7 @@ const Details = () => {
 
     if (cityName && countryCode) {
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&units=metric&appid=775efb0f52ab11dedfc4f8c2b451d598`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&units=metric&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
       )
         .then((res) => res.json())
         .then((data) => {
